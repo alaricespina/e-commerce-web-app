@@ -1,28 +1,38 @@
 "use client";
 import Link from 'next/link';
+import { FaHome, FaShoppingCart, FaUser, FaBoxOpen, FaListAlt, FaCreditCard, FaSignOutAlt } from 'react-icons/fa';
 import { useState } from "react";
 
 const MainNavLinks = [
-  { href: "/", label: "Home" },
-  { href: "/products", label: "Products" },
-  { href: "/cart", label: "Cart" },
+  { href: "/", label: "Home", icon: FaHome },
+  { href: "/products", label: "Products", icon: FaBoxOpen },
+  { href: "/cart", label: "Cart", icon: FaShoppingCart },
 ];
 
 const AccountNavLinks = [
-  { href: "/account/profile", label: "Profile" },
-  { href: "/account/orders", label: "Orders" },
+  { href: "/account/profile", label: "Profile", icon: FaUser },
+  { href: "/account/orders", label: "Orders", icon: FaListAlt },
   { href: "/account/reviews", label: "Reviews" },
   { href: "/account/addresses", label: "Addresses" },
-  { href: "/account/payment", label: "Payment Methods" },
-  { href: "/auth/login", label: "Sign Out" },
+  { href: "/account/payment", label: "Payment Methods", icon: FaCreditCard },
+  { href: "/auth/login", label: "Sign Out", icon: FaSignOutAlt },
 ];
+
+// const AccountNavLinks = [
+//   { href: "/account/profile", label: "Profile" },
+//   { href: "/account/orders", label: "Orders" },
+//   { href: "/account/reviews", label: "Reviews" },
+//   { href: "/account/addresses", label: "Addresses" },
+//   { href: "/account/payment", label: "Payment Methods" },
+//   { href: "/auth/login", label: "Sign Out" },
+// ];
 
 export function Nav() {
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
 
   return (
     <nav className="bg-gray-900 border-b border-gray-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex">
             <Link
@@ -38,6 +48,7 @@ export function Nav() {
                   href={link.href}
                   className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-300 hover:text-gray-50"
                 >
+                  {link.icon && <link.icon className="mr-2"/>}
                   {link.label}
                 </Link>
               ))}
@@ -69,6 +80,7 @@ export function Nav() {
                       className="block px-4 py-2 text-sm text-gray-300 hover:text-gray-50 hover:bg-gray-800"
                       onClick={() => setIsAccountMenuOpen(false)}
                     >
+                      {link.icon && <link.icon className="mr-2"/>}
                       {link.label}
                     </Link>
                   ))}
@@ -107,14 +119,15 @@ export function Nav() {
         <div className="sm:hidden">
           <div className="pt-2 pb-3 space-y-1">
             {MainNavLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="block pl-3 pr-4 py-2 text-base font-medium text-gray-300 hover:text-gray-50 hover:bg-gray-800"
-                onClick={() => setIsAccountMenuOpen(false)}
-              >
-                {link.label}
-              </Link>
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="block pl-3 pr-4 py-2 text-base font-medium text-gray-300 hover:text-gray-50 hover:bg-gray-800"
+                  onClick={() => setIsAccountMenuOpen(false)}
+                >
+                  {link.icon && <link.icon className="mr-2"/>}
+                  {link.label}
+                </Link>
             ))}
           </div>
           <div className="pt-4 pb-3 border-t border-gray-800">
